@@ -26,10 +26,10 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: mongo:latest
+    image: mysql:5.7
     restart: unless-stopped
     volumes:
-      - mongodb-data:/data/db
+      - db_data:/var/lib/mysql
 
     # Uncomment to change startup options
     # environment:
@@ -41,4 +41,4 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
 volumes:
-  mongodb-data:
+  db_data:
