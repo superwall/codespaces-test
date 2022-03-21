@@ -17,7 +17,7 @@ services:
     command: sleep infinity
 
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
+    network_mode: host
 
     # Uncomment the next line to use a non-root user for all processes.
     # user: node
@@ -26,12 +26,20 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
+    network_mode: host
     image: mysql:5.7
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
       - db_data:/var/lib/mysql
+
+  ch:
+    network_mode: host
+    image: yandex/clickhouse-server
+    restart: unless-stopped
+    volumes:
+      - ch_data:/var/lib/clickhouse
 
     # Uncomment to change startup options
     # environment:
@@ -44,3 +52,4 @@ services:
 
 volumes:
   db_data:
+  ch_data:
